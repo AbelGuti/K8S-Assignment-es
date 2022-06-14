@@ -15,11 +15,15 @@ jobs:
       - checkout
       - run:
           name: "Say bye"
-          command: "echo Bye, World!"
+          command: "echo Bye, $CIRCLE_SHA1!"
 workflows:
   say-hello-workflow:
     jobs:
       - say-hello
-      - say-bye:
+      - hold:
+          type: approval
           requires:
             - say-hello
+      - say-bye:
+          requires:
+            - hold
