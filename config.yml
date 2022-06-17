@@ -16,10 +16,11 @@ jobs:
       - run:
           name: "Auth"
           command: aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 450183644535.dkr.ecr.us-west-2.amazonaws.com
+      - setup_remote_docker
       - run:
           name: "Build"
           command: |
-            docker build -t color .
+            docker build -t color .circleci/
             docker tag color 450183644535.dkr.ecr.us-west-2.amazonaws.com/nclouds:latest
       - run:
           name: "Pushing Image"
