@@ -29,23 +29,25 @@ jobs:
     docker:
       - image: ubuntu
     steps:
-      - run: Test
-        command: echo "running tests"
+      - run:
+          name: "Test"
+          command: echo "running tests"
   deployment:
     docker:
       - image: ubuntu
     steps:
-      - run: "Installing Dependencies"
-        command: |
-          apt update
-          apt install -y curl zip
-          curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-          unzip awscliv2.zip
-          ./aws/install
-          curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
-          chmod +x ./kubectl
-          mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
-          kubectl version --short --client
+      - run:
+          name: "Installing Dependencies"
+          command: |
+            apt update
+            apt install -y curl zip
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            ./aws/install
+            curl -o kubectl https://s3.us-west-2.amazonaws.com/amazon-eks/1.22.6/2022-03-09/bin/linux/amd64/kubectl
+            chmod +x ./kubectl
+            mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+            kubectl version --short --client
 workflows:
   nclouds:
     jobs:
