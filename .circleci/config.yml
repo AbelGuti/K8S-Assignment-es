@@ -16,22 +16,6 @@ jobs:
       - run:
           name: "Say hello"
           command: aws --help
-  testing:
-    docker:
-      - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command:
-  deployment:
-    docker:
-      - image: ubuntu
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command:
 
 workflows:
   nclouds:
