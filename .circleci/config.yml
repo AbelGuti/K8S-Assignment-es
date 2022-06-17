@@ -53,13 +53,13 @@ workflows:
     jobs:
       - building
       - testing:
-          requieres:
+          requires:
             - building
       - hold:
           type: approval
-          requieres:
+          requires:
             - building
             - testing
       - deployment:
-          requieres:
+          requires:
             - hold
