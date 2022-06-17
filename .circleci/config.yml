@@ -20,7 +20,7 @@ jobs:
       - run:
           name: "Build"
           command: |
-            docker build -t color .circleci/
+            docker build -t color .
             docker tag color 450183644535.dkr.ecr.us-west-2.amazonaws.com/nclouds:latest
       - run:
           name: "Pushing Image"
