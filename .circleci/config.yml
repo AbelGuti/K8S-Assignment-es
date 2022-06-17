@@ -14,9 +14,16 @@ jobs:
             unzip awscliv2.zip
             ./aws/install
       - run:
-          name: "Say hello"
-          command: aws --help
-
+          name: "Auth"
+          command: aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin 450183644535.dkr.ecr.us-west-2.amazonaws.com
+      - run:
+          name: "Build"
+          command: |
+            docker build -t color .
+            docker tag color 450183644535.dkr.ecr.us-west-2.amazonaws.com/nclouds:latest
+      - run:
+          name: "Pushing Image"
+          command: docker push 450183644535.dkr.ecr.us-west-2.amazonaws.com/nclouds:latest
 workflows:
   nclouds:
     jobs:
